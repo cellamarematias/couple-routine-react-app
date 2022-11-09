@@ -4,27 +4,46 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  useNavigate
 } from "react-router-dom";
+import { useEffect } from 'react';
 
 // pages
-import Navbar from './components/Navbar.jsx';
-import Home from './pages/Home.jsx';
-import About from './pages/About.jsx';
+import Login from './pages/Login/Login.jsx';
 import NotFound from './pages/NotFound.jsx';
+import { ProtectedRoute } from './components/protectedRoutes/ProtectedRoutes.jsx';
+import Navbar from "./components/navbar/Navbar.jsx";
+import Expenses from './pages/Expenses.jsx';
+import Tasks from './pages/Tasks.jsx';
+import Savings from './pages/Savings.jsx';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Navbar />
-    
-      <Routes>
-          <Route path="/" element={<Home />} />
+  const navigate = useNavigate();
+  const user = sessionStorage.getItem('user');
 
-          <Route path="/about" element={<About />} />
-          
-          <Route path="*" element={<NotFound />} />
+  useEffect(() => {
+    if (user) {
+      navigate('/expenses');
+    }
+  }, [user]);
+
+  return (
+
+    <>
+      <Navbar user={!!user} /><Routes>
+        <Route index element={<Login />} />
+
+        <Route path="/login" element={<Login />} />
+
+        <Route element={<ProtectedRoute user={user} />}>
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/expenses" element={<Expenses />} />
+          <Route path="/savings" element={<Savings />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
