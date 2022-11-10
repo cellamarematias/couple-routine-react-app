@@ -13,9 +13,9 @@ import Login from './pages/Login/Login.jsx';
 import NotFound from './pages/NotFound.jsx';
 import { ProtectedRoute } from './components/protectedRoutes/ProtectedRoutes.jsx';
 import Navbar from "./components/navbar/Navbar.jsx";
-import Expenses from './pages/Expenses.jsx';
-import Tasks from './pages/Tasks.jsx';
-import Savings from './pages/Savings.jsx';
+import Expenses from './pages/expenses/Expenses.jsx';
+import Tasks from './pages/tasks/Tasks.jsx';
+import Savings from './pages/savings/Savings.jsx';
 
 function App() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ function App() {
   return (
 
     <>
-      <Navbar user={!!user} /><Routes>
+      <Navbar user={!!user} className='bottom-nav' /><Routes>
         <Route index element={<Login />} />
 
         <Route path="/login" element={<Login />} />

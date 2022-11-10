@@ -1,0 +1,30 @@
+a {
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    color: #ffff;
+}
+
+ul {
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;    
+    list-style-type: none;
+    font-size: 20px;
+}
+
+.active {
+    border-color: #E1FF26;
+    border-top-style: inset;
+    padding-top: .5rem;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,0 +1,132 @@
+.expenses {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.names {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.expensesList {
+    position: fixed;
+    top: 285px;
+    max-height: 185px;
+    overflow: auto;
+    font-size: 5px;
+
+}
+
+.expensesList a{
+    font-size: 15px;
+
+}
+
+.expensesList::-webkit-scrollbar {
+    display: none;
+}
+
+.add {
+    position: fixed;
+    bottom: 85px;
+    width: 80px;
+    height: 80px;
+    -moz-border-radius: 40px; 
+    -webkit-border-radius: 40px; 
+    border-radius: 40px;
+    background-color: #3E3E3E;
+    border-color: #ffff;
+    font-size: 65px;
+    text-align: center;
+    color: #E1FF26;
+}
+
+.circle {
+    position: fixed;
+    top: 95px;
+    width: 180px;
+    height: 180px;
+    -moz-border-radius: 90px; 
+    -webkit-border-radius: 90px; 
+    border-radius: 90px;
+    background-color: #3E3E3E;
+    border-color: #ffff;
+    font-size: 65px;
+    text-align: center;
+    color: #E1FF26;
+}
+
+.circle h2 {
+    margin: 15px;
+}
+
+h2:nth-child(even) {
+    color: #E1FF26;
+    padding-bottom: 20px;
+}
+
+.done {
+    color: tomato;
+}
+
+.descripcion  {
+    width: 92%;
+    margin: auto;
+    border-radius: 5px;
+    font-size: 17px;
+    background-color: #D9D9D9;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.select {
+    width: 95%;
+    height: 30px;
+    margin: auto;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    text-align: center;
+    font-size: 17px;
+}
+
+.buttonModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonDelete {
+    color: red;
+}
+
+.buttonConfirm {
+    color: black;
+}
+
+.buttonCompensar {
+    width: -webkit-fill-available;
+    color: green;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .buttonModal {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .buttonModal input {
+      width: -webkit-fill-available;
+
+    }
+
+  }

@@ -2,7 +2,7 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 
-const API = "http://localhost:3001/api/users/auth";
+const API = "https://api-rest-nodejs-mysql-production.up.railway.app/api/users/auth";
 
 // Define a service using a base URL and expected endpoints
 // retries para reintentar conn al server
@@ -27,7 +27,7 @@ export const userApi = createApi({
             headers : {
                 'Content-Type' : 'application/json'
             },
-            providesTags: ["Posts"],
+            providesTags: ["Users"],
           }),
     }),
   }),

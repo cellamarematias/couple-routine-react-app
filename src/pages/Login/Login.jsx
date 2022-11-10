@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import styles from "./login.module.css";
 import { useLazyPostUserQuery } from '../../redux/api/usersApi';
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-
 
 export default function Login() {
   const [ trigger, { data, isLoading, isSuccess, isError, isFetching, isUninitialized } ] = useLazyPostUserQuery(data);
@@ -22,20 +20,21 @@ export default function Login() {
     navigate('/expenses');
   } else {
   return (
-      <div>
+      <div className={styles.container}>
+        <div>
+          <h2>Log<span>in</span></h2>
+        </div>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.flex}>
-          <label htmlFor="usuario">Usuario</label>
           {/* register your input into the hook by invoking the "register" function */}
-          <input defaultValue="" {...register("usuario", { required: true}) } />
+          <input placeholder='usuario' {...register("usuario", { required: true}) } />
           {errors.usuario && <span>Este campo es requerido</span>}
           
-          <label htmlFor="password">Contraseña</label>
           {/* include validation with required or other standard HTML validation rules */}
-          <input {...register("password", { required: true })} />
+          <input placeholder='contraseña' type={'password'}{...register("password", { required: true })} />
           {/* errors will return when field validation fails  */}
           {errors.password && <span>Este campo es requerido</span>}
           
-          <input type="submit" />
+          <input type="submit"  value={'entrar'}/>
         </form>
       </div>
     )

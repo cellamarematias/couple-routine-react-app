@@ -9,8 +9,23 @@ const prodConfig = {
   module: {
     rules: [
       {
-        test: /\.(css|scss|sass)$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        test: /\\.js$/,
+        loader: "babel-loader",
+        exclude: "/node_modules/",
+      },
+     // CSS rules
+      {
+        test: /\\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true,
+            },
+          },
+        ],
       },
     ],
   },
