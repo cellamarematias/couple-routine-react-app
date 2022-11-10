@@ -15,8 +15,6 @@
   }
   
   .modal {
-    /* width: 90%;
-    height: 80%; */
     background: rgb(110, 110, 110);
     color: white;
     z-index: 10;

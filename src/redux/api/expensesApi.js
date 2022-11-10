@@ -2,7 +2,7 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 
-const API = "https://api-rest-nodejs-mysql-production.up.railway.app/expenses";
+const API = "https://api-rest-node-js-my-sql.vercel.app/api/expenses";
 
 // Define a service using a base URL and expected endpoints
 // retries para reintentar conn al server
@@ -21,7 +21,7 @@ export const expensesApi = createApi({
         query: () => "/",
         providesTags: ["Expenses"],
         headers: {
-            'Access-Control-Allow-Origin': '*',            
+            'Access-Control-Allow-Origin': '*',
         },
     }),
     addExpenses: builder.mutation({

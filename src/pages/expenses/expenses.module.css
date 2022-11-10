@@ -18,7 +18,7 @@
 .expensesList {
     position: fixed;
     top: 285px;
-    max-height: 185px;
+    max-height: 120px;
     overflow: auto;
     font-size: 5px;
 

@@ -84,17 +84,17 @@ export default function Tasks() {
 
       <ul>
         {data?.map((task) => (
-          <li key={task.idtareas}>
-            <a href="#" onClick={() => {
-              setIsOpen(true)
-              setTask({
-                titulo: task.titulo,
-                descripcion: task.descripcion,
-                date: new Date(task.date).toISOString().substr(0, 10),
-                done: task.done,
-                id: task.idtareas
-              })
-            }} className={task.done ? styles.done : ''}>{task.titulo}</a>
+          <li key={task.idtareas} onClick={() => {
+            setIsOpen(true)
+            setTask({
+              titulo: task.titulo,
+              descripcion: task.descripcion,
+              date: new Date(task.date).toISOString().substr(0, 10),
+              done: task.done,
+              id: task.idtareas
+            })
+          }} >
+            <a href="#" className={task.done ? styles.done : ''}>{task.titulo}</a>
           </li>
         ))}
       </ul>
@@ -110,7 +110,7 @@ export default function Tasks() {
               className={styles.centerText}
             />
             <textarea
-              rows={20}
+              rows={11}
               type="text"
               name="descripcion"
               value={task.descripcion}
@@ -130,9 +130,9 @@ export default function Tasks() {
               onChange={onChange}
               className={styles.select}
             >
-              <option value="0">Pendiente</option>  
-              <option value="1">Hecho</option>  
-            </select>          
+              <option value="0">Pendiente</option>
+              <option value="1">Hecho</option>
+            </select>
             <input
               type="hidden"
               name="id"
