@@ -11,15 +11,17 @@ a {
 }
 
 .tasks {
-    margin: 3rem 5rem 0 0;
-    display: flex;
-    justify-content: center;
+    margin: 3rem 5rem 0 1rem;
+}
+
+.tasks ul {
+    margin-left: 1rem;
 }
 
 .add {
-    position: fixed;
-    bottom: 85px;
     right: 40%;
+    position: fixed;
+    bottom: 150px;
     width: 80px;
     height: 80px;
     -moz-border-radius: 40px; 
@@ -27,6 +29,8 @@ a {
     border-radius: 40px;
     background-color: #3E3E3E;
     border-color: #ffff;
+    font-size: 65px;
+    text-align: center;
     color: #E1FF26;
 }
 

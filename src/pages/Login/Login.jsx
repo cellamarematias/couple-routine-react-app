@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import styles from "./login.module.css";
 import { useLazyPostUserQuery } from '../../redux/api/usersApi';
 import { useNavigate } from "react-router-dom";
+import Loader from '../../components/loader/Loader.jsx';
 
 export default function Login() {
   const [ trigger, { data, isLoading, isSuccess, isError, isFetching, isUninitialized } ] = useLazyPostUserQuery(data);
@@ -11,7 +12,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   if (isFetching) {
-    return <h1>Loading</h1>
+    return <Loader />
   } 
 
   if (isSuccess) {

@@ -41,11 +41,11 @@ export default function Expenses() {
 
     if (mati > maga) {
       numb = divide - maga;
-      difference = numb.toFixed(0);
+      difference = Math.floor(numb.toFixed(2));
       userTop = 'Maga';
     } else {
       numb = divide - mati;
-      difference = numb.toFixed(0);
+      difference = Math.floor(numb.toFixed(2));
       userTop = 'Mati';
     }
 
@@ -55,7 +55,7 @@ export default function Expenses() {
 
   calulator();
 
-  console.log(new Date(Date.now()).toLocaleDateString().substr(0, 10))
+  //console.log(Math.floor(difference))
 
   const balance = () => {
     let user = userTop === 'Mati' ? 1 : 2;
@@ -67,9 +67,10 @@ export default function Expenses() {
     })
     console.log(expense);
     triggerAdd(expense);
-}
+  }
 
   const [show, setShow] = useState(false);
+  const [modalExpenses, setModalExpenses] = useState(false);
   //MODAL
   const [isOpen, setIsOpen] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
@@ -82,7 +83,6 @@ export default function Expenses() {
   })
 
   const onChange = (e) => {
-    console.log(expense)
     setExpense({ ...expense, [e.target.name]: e.target.value });
   };
 
@@ -144,36 +144,14 @@ export default function Expenses() {
       } className={styles.add}>+</button>
 
       <div className={styles.names}>
-        <h2>{userTop}</h2>
-        <button className={styles.circle} onClick={() => setShow(prevshow => !prevshow)}>
-          <h2>debe</h2>
+        <button className={styles.circle} onClick={() => setModalExpenses(prevshow => !prevshow)}>
+          <h2>{userTop}</h2>
           <h2>${difference}</h2>
         </button>
       </div>
 
-      <div className={styles.expensesList}>
-        <ul className={show ? '' : styles.hidden}>
-          {data?.map((expense) => (
-            <li key={expense.idtareas}>
-              <a href="#" onClick={() => {
-                setIsOpen(true)
-                setExpense({
-                  descripcion: expense.descripcion,
-                  monto: expense.monto,
-                  id_usuario: expense.id_usuario,
-                  idgastos: expense.idgastos,
-                  date: new Date(expense.date).toISOString().substr(0, 10),
-                })
-              }} className={expense.descripcion === 'Balance a $0' ? styles.done : ''}>{new Date(expense.date).toLocaleDateString().substr(0, 10)} | 
-              ${expense.descripcion === 'Balance a $0' ? expense.monto / 2 : expense.monto } | {expense.id_usuario === 1 ? 'Mati': 'Maga'}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-
       {isOpen &&
-        <Modal setIsOpen={setIsOpen} title={isAdding ? 'Nuevo Gasto' : 'Gasto'}>
+        <Modal setIsOpen={setIsOpen} title={isAdding ? 'Nuevo Gasto' : 'Gasto'} className={show ? styles.index : ''} setShow={setShow}>
 
           <form onSubmit={isAdding ? add : edit}>
             <input
@@ -184,7 +162,7 @@ export default function Expenses() {
               onChange={onChange}
             />
             <input
-              type="text"
+              type="number"
               name="monto"
               placeholder='monto'
               value={expense.monto}
@@ -222,6 +200,37 @@ export default function Expenses() {
 
         </Modal>
       }
+
+      {modalExpenses &&
+
+        <Modal setIsOpen={setModalExpenses} title={'Lista de gastos'} setShow={setModalExpenses}>
+          <div className={styles.expensesList}>
+            <ul >
+              {data?.map((expense) => (
+                <li key={expense.idtareas}>
+                  <a href="#" onClick={() => {
+                    setIsOpen(true);
+                    setShow(prevshow => !prevshow);
+                    console.log('el z.index', show);
+                    setExpense({
+                      descripcion: expense.descripcion,
+                      monto: expense.monto,
+                      id_usuario: expense.id_usuario,
+                      idgastos: expense.idgastos,
+                      date: new Date(expense.date).toISOString().substr(0, 10),
+                    })
+                  }} className={expense.descripcion === 'Balance a $0' ? styles.done : ''}>{new Date(expense.date).toLocaleDateString().substr(0, 10)} |
+                    ${expense.descripcion === 'Balance a $0' ? expense.monto / 2 : expense.monto} | {expense.id_usuario === 1 ? 'Mati' : 'Maga'} |</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Modal>
+
+      }
+
+
+
     </section>
   )
 }

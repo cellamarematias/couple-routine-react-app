@@ -3,6 +3,7 @@ import { useGetTaskQuery, useAddTaskMutation, useEditTaskMutation, useDeleteTask
 import { useState } from 'react';
 import Modal from '../../components/modal/Modal.jsx';
 import styles from './tasks.module.css';
+import Loader from '../../components/loader/Loader.jsx';
 
 export default function Tasks() {
   const { data, isLoagin, error } = useGetTaskQuery(undefined, {
@@ -72,6 +73,14 @@ export default function Tasks() {
     setIsAdding(false);
   }
 
+  if (isLoading) {
+    return <Loader />
+  } 
+
+  if (isFetching) {
+    return <Loader />
+  } 
+
   return (
     // MODAL
 
@@ -80,7 +89,7 @@ export default function Tasks() {
         setIsOpen(true);
         setIsAdding(true);
         }
-      } className={styles.add}>Nueva</button>
+      } className={styles.add}>+</button>
 
       <ul>
         {data?.map((task) => (
@@ -100,11 +109,12 @@ export default function Tasks() {
       </ul>
 
       {isOpen &&
-        <Modal setIsOpen={setIsOpen} title={isAdding ? 'Nueva Tarea' : 'Tarea'} >
+        <Modal setIsOpen={setIsOpen} title={isAdding ? 'Nueva Tarea' : 'Tarea'} setShow={setIsOpen}>
           <form onSubmit={isAdding ? add : edit}>
             <input
               type="text"
               name="titulo"
+              placeholder='título'
               value={task.titulo}
               onChange={onChange}
               className={styles.centerText}
@@ -113,6 +123,7 @@ export default function Tasks() {
               rows={11}
               type="text"
               name="descripcion"
+              placeholder='descripcion'
               value={task.descripcion}
               onChange={onChange}
               className={styles.descripcion}

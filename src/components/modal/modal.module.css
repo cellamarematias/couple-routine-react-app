@@ -2,12 +2,12 @@
     background-color: rgba(0, 0, 0, 0.2);
     /* width: 100vw; */
     height: 100vh;
-    z-index: 0;
     top: 0;
     position: absolute;
   }
   
   .centered {
+    width: 90%;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -15,9 +15,8 @@
   }
   
   .modal {
-    background: rgb(110, 110, 110);
+    background: rgb(32, 32, 32);
     color: white;
-    z-index: 10;
     border-radius: 5px;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
   }
@@ -25,11 +24,12 @@
   form {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
   }
   
   .modalHeader {
     height: 50px;
-    background: rgb(110, 110, 110);
+    background: rgb(32, 32, 32);
     overflow: hidden;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
@@ -50,6 +50,36 @@
     font-size: 14px;
     color: #2c3e50;
     text-align: center;
+  }
+  .modal input {
+    background: rgb(32, 32, 32);
+    border-bottom: 1px solid #fff;
+    border-radius: 0px;
+    color: #fafafa;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .modal select {
+    background: rgb(32, 32, 32);
+    border-bottom: 1px solid #fff;
+    color: #fafafa;
+    width: 95%;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .modal textarea {
+    background: rgb(32, 32, 32);
+    border-bottom: 1px solid #fff;
+    border-radius: 0px;
+    color: #fafafa;
+    width: 95%;
+  }
+
+  .modal input[type="date"] { 
+    background: rgb(32, 32, 32);
+    border-bottom: 1px solid #fff;
+    color: #fafafa;
+    width: 95%;
   }
   
   .modalActions {
