@@ -16,8 +16,10 @@ export default function Login() {
   } 
 
   if (isSuccess) {
+    console.log(data);
     sessionStorage.setItem('authorized', true);
     sessionStorage.setItem('user', data.user);
+    sessionStorage.setItem('token', data.token);
     navigate('/expenses');
   } else {
   return (

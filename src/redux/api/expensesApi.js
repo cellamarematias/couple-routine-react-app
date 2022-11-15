@@ -2,20 +2,37 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 
-const API = "https://node-api-mysql-60j718rds-cellamarematias.vercel.app/api/expenses";
+const API = "https://node-api-mysql-cellamarematias.vercel.app/api/expenses";
 
 // Define a service using a base URL and expected endpoints
 // retries para reintentar conn al server
 
 // INVALIDATIONS - para refecth - providesTags - invalidatesTags
 
+const token = sessionStorage.getItem('token');
+
 export const expensesApi = createApi({
   reducerPath: 'expensesApi',
-  baseQuery: retry(fetchBaseQuery({ baseUrl: API }), {
+  baseQuery: retry(fetchBaseQuery({ baseUrl: API, prepareHeaders: (headers, { getState }) => {
+    // If we have a token set in state, let's assume that we should be passing it.
+    const token = sessionStorage.getItem('token');
+
+    if (token) {
+      headers.set('auth-token', `${token}`)
+    }
+    return headers;
+  }, }), {
     maxRetries: 2
   }),
   keepUnusedDataFor: 2400,
   tagTypes: ["Expenses"],
+  prepareHeaders: (headers, { getState }) => {
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      headers.set('authorization', `Bearer ${token}`)
+    }
+    return headers
+  },
   endpoints: (builder) => ({
     getExpenses: builder.query({
         query: () => "/",

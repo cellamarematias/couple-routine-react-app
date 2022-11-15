@@ -1,3 +1,20 @@
+form {
+    text-align: center;
+}
+
+input {
+    text-align: center;
+}
+
+.tasks {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
 li {
     color: #E1FF26;
     margin: 10px;
@@ -10,18 +27,12 @@ a {
     color: #ffff;
 }
 
-.tasks {
-    margin: 3rem 5rem 0 1rem;
-}
-
 .tasks ul {
     margin-left: 1rem;
 }
 
 .add {
-    right: 40%;
-    position: fixed;
-    bottom: 150px;
+    margin-bottom: 2rem;
     width: 80px;
     height: 80px;
     -moz-border-radius: 40px; 

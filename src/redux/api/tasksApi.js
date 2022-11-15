@@ -2,7 +2,7 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 
-const API = "https://node-api-mysql-60j718rds-cellamarematias.vercel.app/api/tasks";
+const API = "https://node-api-mysql-cellamarematias.vercel.app/api/tasks";
 
 // Define a service using a base URL and expected endpoints
 // retries para reintentar conn al server
@@ -13,7 +13,15 @@ const API = "https://node-api-mysql-60j718rds-cellamarematias.vercel.app/api/tas
 
 export const tasksApi = createApi({
   reducerPath: 'tasksApi',
-  baseQuery: retry(fetchBaseQuery({ baseUrl: API }), {
+  baseQuery: retry(fetchBaseQuery({ baseUrl: API,   prepareHeaders: (headers, { getState }) => {
+    // If we have a token set in state, let's assume that we should be passing it.
+    const token = sessionStorage.getItem('token');
+
+    if (token) {
+      headers.set('auth-token', `${token}`)
+    }
+    return headers;
+  }, }), {
     maxRetries: 2
   }),
   keepUnusedDataFor: 2400,
@@ -21,10 +29,11 @@ export const tasksApi = createApi({
   endpoints: (builder) => ({
     getTask: builder.query({
         query: () => "/",
+        credentials: 'include',
         providesTags: ["Tasks"],
         headers: {
             'Access-Control-Allow-Origin': '*',
-        },
+          },
     }),
     addTask: builder.mutation({
         query: (body) => ({

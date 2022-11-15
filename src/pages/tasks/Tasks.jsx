@@ -73,11 +73,7 @@ export default function Tasks() {
     setIsAdding(false);
   }
 
-  if (isLoading) {
-    return <Loader />
-  } 
-
-  if (isFetching) {
+  if (isLoading || isFetching) {
     return <Loader />
   } 
 
@@ -85,11 +81,6 @@ export default function Tasks() {
     // MODAL
 
     <section className={styles.tasks}>
-      <button onClick={() => {
-        setIsOpen(true);
-        setIsAdding(true);
-        }
-      } className={styles.add}>+</button>
 
       <ul>
         {data?.map((task) => (
@@ -107,6 +98,12 @@ export default function Tasks() {
           </li>
         ))}
       </ul>
+
+      <button onClick={() => {
+        setIsOpen(true);
+        setIsAdding(true);
+        }
+      } className={styles.add}>+</button>
 
       {isOpen &&
         <Modal setIsOpen={setIsOpen} title={isAdding ? 'Nueva Tarea' : 'Tarea'} setShow={setIsOpen}>

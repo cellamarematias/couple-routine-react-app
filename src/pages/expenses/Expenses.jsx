@@ -3,6 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import Modal from '../../components/modal/Modal.jsx';
 import styles from './expenses.module.css';
+import Loader from '../../components/loader/Loader.jsx';
 import { useGetExpensesQuery, useAddExpensesMutation, useEditExpensesMutation, useDeleteExpensesMutation } from '../../redux/api/expensesApi.js';
 
 export default function Expenses() {
@@ -89,6 +90,9 @@ export default function Expenses() {
   const add = (e) => {
     e.preventDefault();
 
+    console.log('esto se guarda', expense)
+
+
     if (!expense.descripcion || !expense.monto || !expense.id_usuario || !expense.date) {
       alert('Faltan datos. Completar');
       setIsOpen(true);
@@ -133,15 +137,15 @@ export default function Expenses() {
     setIsAdding(false);
   }
 
+  if (isLoading) {
+    return <Loader />
+  } 
+
+
   return (
     // MODAL
 
     <section className={styles.expenses}>
-      <button onClick={() => {
-        setIsOpen(true);
-        setIsAdding(true);
-      }
-      } className={styles.add}>+</button>
 
       <div className={styles.names}>
         <button className={styles.circle} onClick={() => setModalExpenses(prevshow => !prevshow)}>
@@ -149,6 +153,15 @@ export default function Expenses() {
           <h2>${difference}</h2>
         </button>
       </div>
+
+
+      <button onClick={() => {
+        setIsOpen(true);
+        setIsAdding(true);
+      }
+      } className={styles.add}>+</button>
+
+
 
       {isOpen &&
         <Modal setIsOpen={setIsOpen} title={isAdding ? 'Nuevo Gasto' : 'Gasto'} className={show ? styles.index : ''} setShow={setShow}>
@@ -174,7 +187,7 @@ export default function Expenses() {
               onChange={onChange}
               className={styles.select}
             >
-              <option value="">Ususario</option>
+              <option value="">Usuario</option>
               <option value="1">Mati</option>
               <option value="2">Maga</option>
             </select>
@@ -228,9 +241,6 @@ export default function Expenses() {
         </Modal>
 
       }
-
-
-
     </section>
   )
 }
